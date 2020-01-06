@@ -62,7 +62,7 @@ class Dog
       SELECT * FROM dogs WHERE name = ? AND breed = ?
       SQL
 
-    result = DB[:conn].execute(sql, name, breed).first
+    result = DB[:conn].execute(sql, name, breed)
 
     if !result.empty?
       Dog.new_from_db(result)
