@@ -48,8 +48,13 @@ class Dog
     Dog.new(id: row[0], name: row[1], breed: row[2])
   end
 
-  def self.find_by_id
+  def self.find_by_id(id)
+    sql = <<-SQL
+      SELECT * FROM dogs WHERE id = ?
+      SQL
 
+    dog_data = DB[:conn].execute(sql, id).first
+    Dog.new_from_db(dog_data)
   end
 
 end
